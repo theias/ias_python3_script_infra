@@ -5,3 +5,5 @@ src/input/*
 src/output/*
 drop/*
 src/log/*
+
+__pycache__/
