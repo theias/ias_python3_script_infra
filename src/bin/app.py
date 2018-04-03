@@ -28,10 +28,14 @@ class IASApplication(IASInfra):
 	def main(self):
 		self.log_info("In main.")
 		
+		generic_output_file = self.get_generic_output_file_name('extract','txt')
 		self.log_info(
 			"Generic output file: "
-			+ self.get_generic_output_file_name('extract','json')
+			+ generic_output_file
 		)
+		text_file = open(generic_output_file, "w")
+		text_file.write('Here is an extract.')
+		text_file.close
 
 
 
