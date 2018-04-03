@@ -40,6 +40,7 @@ class IASInfra(
 		# print("Maybe src dir: " + maybe_src_dir)	
 
 	def log_debug_variables(self):
+		self.log_debug("************ Debugging variables")
 		self.log_debug("real_bin:" + self.paths['real_bin'])
 		self.log_debug("bin: " + self.paths['bin'])
 		
