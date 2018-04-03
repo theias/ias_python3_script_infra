@@ -1,10 +1,25 @@
 # ias-python3-script-infra
 
-Here is an introduction to this project.
+A framework has been developed so that programs (such as those written in Bash, Perl, and Python) use a (somewhat) standardized:
+
+* source repository layout
+* logging infrastructure
+* file system layout when installed
+
+The laouts mentioned above refer to:
+
+* input directory
+* output directory
+* log directory (currently they log to syslog, I need to add the option of logging to files)
+* configuration directory ('etc')
+
+so that they behave nicely with each other.
+
+This needs to be documented more.
 
 # License
 
-copyright (C) 2017 Author, Institution
+copyright (C) 2017 Martin VanWinkle, Institute for Advanced Study
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,7 +37,7 @@ See
 
 ## Description
 
-* some_script.sh - does something.
+* bin/app.py - currently the python example.
 
 # Supplemental Documentation
 
@@ -30,54 +45,54 @@ Supplemental documentation for this project can be found here:
 
 * [Supplemental Documentation](./doc/index.md)
 
-# Installation
+# Usage
 
-Ideally stuff should run if you clone the git repo, and install the deps specified
-in either "deb_control" or "rpm_specific"
+## Install Project Template Generator
+You will want to install the code that creates project directories in the correct layout.
 
-Optionally, you can build a package which will install the binaries in
+On all systems you need to install the fakeroot package.
 
-* /opt/IAS/bin/ias-python3-script-infra/.
+On deb systems you need to install build-essential.
 
-# Building a Package
-
-## Requirements
-
-### All Systems
-
-* fakeroot
-
-### Debian
-
-* build-essential
-
-### RHEL based systems
-
-* rpm-build
-
-## Export a specific tag (or just the source directory)
-
-## Supported Systems
-
-### Debian packages
+On rpm systems you need to install rpmbuild.
 
 <pre>
-  fakeroot make clean install debsetup debbuild
-</pre>
-
-### RHEL Based Systems
-
-If you're building from a tag, and the spec file has been put
-into the tag, then you can build this on any system that has
-rpm building utilities installed, without fakeroot:
-
-<pre>
-make clean install cp-rpmspec rpmbuild
-</pre>
-
-This will generate a new spec file every time:
-
-<pre>
+# Install the project template generator:
+git clone https://github.com/theias/ias_package_shell
+cd ias_package_shell
+# If you're on a debian based system:
+fakeroot make clean install debsetup debbuild
+# If you're on an rpm based system:
 fakeroot make clean install rpmspec rpmbuild
 </pre>
+
+Install the package that was generated.
+
+## Install Python Library (this project)
+
+<pre>
+# Install the project template generator:
+git clone https://github.com/theias/ias_python3_script_infra
+cd ias_package_shell
+# If you're on a debian based system:
+fakeroot make clean install debsetup debbuild
+# If you're on an rpm based system:
+fakeroot make clean install rpmspec rpmbuild
+</pre>
+
+Install the package that was generated.  (notice the pattern? :) )
+
+## cd Somewhere and Experiment
+
+<pre>
+cd /var/tmp
+/opt/IAS/bin/ias-package-shell/package_shell.pl
+# Answer the questions.
+
+# Add the sample app to your project template
+cp /opt/IAS/bin/ias-python3-script-infra/app.py (name of resultant directory)/src/bin
+</pre>
+
+... and have fun! (I hope!)
+
 

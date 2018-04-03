@@ -16,7 +16,7 @@ sys.path.insert(0,
 
 from IASInfra import IASInfra
 
-
+# Change "IASApplication" to whatever you want to call your app:
 class IASApplication(IASInfra):
 
 	def setup(self):
@@ -45,5 +45,7 @@ class IASApplication(IASInfra):
 
 if __name__ == '__main__':
 	app = IASApplication(__file__)
-	# 
+	# Set the environment variable, IASInfra_log_to_stderr, to something non-zero
+	# to enable debugging to stderr.
+	# Example:  export IASInfra_log_to_stderr=1
 	app.run()
