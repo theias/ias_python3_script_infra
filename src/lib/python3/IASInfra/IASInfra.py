@@ -69,6 +69,8 @@ class IASInfra(
 	def get_generic_output_file_name(self,label='generic',extension='txt'):
 		output_dir = self.script_output_dir()
 
+		self.create_script_output_dir()
+
 		file_name_components = [
 			self.script_name_without_extension,
 			datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),
