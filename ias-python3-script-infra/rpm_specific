@@ -1,0 +1,7 @@
+#Requires: 
+AutoReqProv: no 
+Summary: Libraries and scripts for python3 infrastructure
+Group: Generic Group
+License: Generic License
+Vendor: Generic Vendor
+BuildArch: noarch
