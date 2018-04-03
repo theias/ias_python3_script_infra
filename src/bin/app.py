@@ -27,6 +27,11 @@ class IASApplication(IASInfra):
 		
 	def main(self):
 		self.log_info("In main.")
+		
+		self.log_info(
+			"Generic output file: "
+			+ self.get_generic_output_file_name('extract','json')
+		)
 
 
 

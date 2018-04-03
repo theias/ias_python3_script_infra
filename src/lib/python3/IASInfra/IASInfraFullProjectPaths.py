@@ -41,3 +41,12 @@ class IASInfraFullProjectPaths:
 	
 	def log_dir(self):
 		return self.get_generic_project_directory('log')
+
+	def script_output_dir(self):
+		project_output_dir = self.output_dir()
+		script_output_dir = os.sep.join([
+			project_output_dir,
+			self.script_name_without_extension
+		])
+		
+		return script_output_dir
