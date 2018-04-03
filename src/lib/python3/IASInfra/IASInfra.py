@@ -16,7 +16,19 @@ class IASInfra(
 ):
 	def __init__(self, script_name):
 		
-		self.log_to_stderr = False
+		# self.log_to_stderr = False
+		
+		# pp = pprint.PrettyPrinter(indent=4)
+		# pp.pprint(os.environ)
+		
+		if 'IASInfra_log_to_stderr' in os.environ:
+			if os.environ['IASInfra_log_to_stderr'] != '0':
+				self.log_to_stderr = True
+			else:
+				self.log_to_stderr = False
+		else:
+			self.log_to_stderr = False
+		
 		self.setup_IAS_infra_logging(script_name)
 		
 		self.script_file = os.path.basename(script_name)
@@ -32,7 +44,7 @@ class IASInfra(
 		self.bin_whence = self.default_bin_whence
 		
 		self.do_base_path_calculations()
-		self.log_debug_variables()
+
 
 	def are_we_in_src(self):
 		self.script_path_components = self.paths[self.bin_whence].split('/')

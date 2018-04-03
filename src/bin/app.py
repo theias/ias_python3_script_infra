@@ -28,6 +28,10 @@ class IASApplication(IASInfra):
 	def main(self):
 		self.log_info("In main.")
 		
+		# Use this to see what variables are available.
+		# Currently, inconsistent and was used for testing.
+		self.log_debug_variables()
+
 		generic_output_file = self.get_generic_output_file_name('extract','txt')
 		self.log_info(
 			"Generic output file: "
@@ -41,5 +45,5 @@ class IASApplication(IASInfra):
 
 if __name__ == '__main__':
 	app = IASApplication(__file__)
-	# app.log_to_stderr = True;
+	# 
 	app.run()
