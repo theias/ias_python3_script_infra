@@ -44,8 +44,8 @@ class IASInfra(
 		self.log_debug("real_bin:" + self.paths['real_bin'])
 		self.log_debug("bin: " + self.paths['bin'])
 		
-		self.log_debug('bin_dir' + self.bin_dir())
-		self.log_debug('input_dir' + self.input_dir())
-		self.log_debug('output_dir' + self.output_dir())
-		self.log_debug('conf_dir' + self.conf_dir())
-		self.log_debug('log_dir' + self.log_dir())
+		self.log_debug('bin_dir ' + self.bin_dir())
+		self.log_debug('input_dir ' + self.input_dir())
+		self.log_debug('output_dir ' + self.output_dir())
+		self.log_debug('conf_dir ' + self.conf_dir())
+		self.log_debug('log_dir ' + self.log_dir())

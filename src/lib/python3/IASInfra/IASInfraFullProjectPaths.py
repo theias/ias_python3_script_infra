@@ -6,23 +6,27 @@ class IASInfraFullProjectPaths:
 			self.up_path_components=['..']
 			self.project_name=self.script_path_components[-3]
 		else:
-			self.installed_package_name=self.script_path_components[-2]
-			self.up_path_components=['..','..',self.installed_package_name]
+			self.installed_package_name=self.script_path_components[-1]
+			self.up_path_components=['..','..']
+	
+		
 	
 	def get_generic_project_directory(self, dir_name):
 		if self.are_we_in_src():
-			return os.path.join(
-				self.paths[self.bin_whence],
-				*self.up_path_components,
-				dir_name
-			)
-		else:
-			return os.path.join(
+			return os.sep.join([
 				self.paths[self.bin_whence],
 				*self.up_path_components,
 				dir_name,
-				self.installed_package_name
-			)
+			])
+
+		else:
+			return os.sep.join([
+				self.paths[self.bin_whence],
+				*self.up_path_components,
+				dir_name,
+				self.installed_package_name,
+			])
+
 	def bin_dir(self):
 		return self.paths[self.bin_whence]
 	
