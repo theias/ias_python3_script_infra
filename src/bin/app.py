@@ -37,4 +37,5 @@ class IASApplication(IASInfra):
 
 if __name__ == '__main__':
 	app = IASApplication(__file__)
+	# app.log_to_stderr = True;
 	app.run()

@@ -15,6 +15,8 @@ class IASInfra(
 	IASInfraFullProjectPaths,
 ):
 	def __init__(self, script_name):
+		
+		self.log_to_stderr = False
 		self.setup_IAS_infra_logging(script_name)
 		
 		self.script_file = os.path.basename(script_name)
