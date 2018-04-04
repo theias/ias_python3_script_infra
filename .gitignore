@@ -7,3 +7,4 @@ drop/*
 src/log/*
 
 __pycache__/
+*.pyc
