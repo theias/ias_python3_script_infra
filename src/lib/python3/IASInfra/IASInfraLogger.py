@@ -1,6 +1,6 @@
 from .IASInfraSyslog import *
 
 class IASInfraLogger(
-	IASInfraSyslog
+    IASInfraSyslog
 ):
-	pass
+    pass
