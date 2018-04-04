@@ -1,6 +1,13 @@
+ias-python3-script-infra 1.0.1-0 noarch; urgency=low
+
+	* Converted tabs to spaces
+	* Added documentation examples
+
+ -- Martin VanWinkle  mvanwinkle@ias.edu  Wed, 04 Apr 2018 15:43:09 -0400
+
 ias-python3-script-infra 1.0.0-0 noarch; urgency=low
 
 	* initial packaging stuff
 
- -- YOUR NAME HERE YOUR@EMAIL.HERE  Tue, 03 Apr 2018 09:48:07 -0400
+ -- Martin VanWinkle  mvanwinkle@ias.edu  Tue, 03 Apr 2018 09:48:07 -0400
 

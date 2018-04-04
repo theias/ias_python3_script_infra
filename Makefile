@@ -190,11 +190,25 @@ ifneq ("$(wildcard $(SRC_DIR)/root_etc/*)","")
 	chmod -R 0644 $(ROOT_DIR)/etc
 endif
 
-	################
-	# Some Final Cleanup	
+
+	# Set up directories
 	chmod -R a+r $(ROOT_DIR)
-	-find $(ROOT_DIR) -type d |xargs chmod a+rx
-	-find $(ROOT_DIR) -type d -name .svn | xargs -r rm -r
+	-find $(ROOT_DIR) -type d -exec chmod a+rx {} \;
+
+	################
+	# Some Final Cleanup
+	# This shouldn't need to happen if you're building from an export
+	
+	# Subversion
+	-find $(ROOT_DIR) -type d -name '.svn' -exec rm -r {} \;
+
+	# vi
+	-find $(ROOT_DIR) -type f -name '*.swp' -exec rm -r {} \;
+	
+	# python
+	-find $(ROOT_DIR) -type d -name '__pycache__' -exec rm -r {} \;
+	-find $(ROOT_DIR) -type f -name '*.pyc' -exec rm -r {} \;
+	
 	
 	################
 	# An example of creating a file owned by
