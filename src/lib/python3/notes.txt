@@ -1,0 +1,2 @@
+Module documentation can be accessed when in this directory by running:
+pydoc3 IASInfra.IASInfra
