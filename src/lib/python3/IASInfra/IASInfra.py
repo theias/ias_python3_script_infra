@@ -88,11 +88,10 @@ class IASInfra(
             datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),
             label + '.' + extension,
         ]
-        
-        full_path_name = os.sep.join([
-            output_dir,
-            *['--'.join(file_name_components)],
-        ])
+        join_args = [output_dir]
+        join_args.append('--'.join(file_name_components))
+
+        full_path_name = os.sep.join(join_args)
         
         return full_path_name
 
