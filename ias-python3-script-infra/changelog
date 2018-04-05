@@ -1,3 +1,11 @@
+ias-python3-script-infra 1.2.0-0 noarch; urgency=low
+
+	* Tested with Python 2.7.5, 2.7.12, 3.4.5, 3.5.2
+	  This is not a guarantee that the libraries will continue to
+	  work with anything that's not Python 3.
+
+ -- Martin VanWinkle  mvanwinkle@ias.edu  Thu, 05 Apr 2018 14:48:47 -0400
+
 ias-python3-script-infra 1.0.1-0 noarch; urgency=low
 
 	* Converted tabs to spaces
