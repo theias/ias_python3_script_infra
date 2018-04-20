@@ -6,7 +6,8 @@ from datetime import *
 
 import os
 import sys
-
+import json
+import getpass
 import pprint
 
 class IASInfra(
@@ -20,6 +21,8 @@ class IASInfra(
         
         # pp = pprint.PrettyPrinter(indent=4)
         # pp.pprint(os.environ)
+        
+        self.script_name = script_name
         
         if 'IASInfra_log_to_stderr' in os.environ:
             if os.environ['IASInfra_log_to_stderr'] != '0':
@@ -56,7 +59,7 @@ class IASInfra(
         if self.script_path_components[-2] == 'src':
             return True
         return False
-        # print("Maybe src dir: " + maybe_src_dir)	
+        # print("Maybe src dir: " + maybe_src_dir)
 
     def log_debug_variables(self):
         self.log_debug("************ Debugging variables")
@@ -94,5 +97,17 @@ class IASInfra(
         full_path_name = os.sep.join(join_args)
         
         return full_path_name
+    
+    def log_start(self):
+        self.log_info('%s : --BEGINNING--' % sys.argv[0])
+        self.log_info('script file: %s' % os.path.realpath(self.script_name))
+        self.log_info('User: %s' % getpass.getuser()) 
+        self.log_info('Arguments: %s' % json.dumps(sys.argv))
 
+    def log_end(self):
+        self.log_info('%s --ENDING--' % sys.argv[0])
+    
+    def log_error_and_exit(self, message, exit_value):
+        self.log_error(message)
+        sys.exit(exit_value)
         

@@ -14,15 +14,21 @@ class IASInfraSyslog:
         openlog(script_name,LOG_PID)
     
     def log_debug(self, message):
-        self.log_eprint('LOG_DEBUG ', message)
+        if self.log_to_stderr:
+            self.log_eprint('LOG_DEBUG ', message)
+            
         syslog(LOG_DEBUG, message)
     
     def log_info(self, message):
-        self.log_eprint('LOG_INFO', message)
+        if self.log_to_stderr:
+            self.log_eprint('LOG_INFO', message)
+            
         syslog(LOG_INFO, message)
     
     def log_notice(self, message):
-        self.log_eprint('LOG_NOTICE', message)
+        if self.log_to_stderr:
+            self.log_eprint('LOG_NOTICE', message)
+            
         syslog(LOG_NOTICE, message)
     
     def log_warning(self, message):
@@ -46,5 +52,4 @@ class IASInfraSyslog:
         syslog(LOG_EMERG, message)
     
     def log_eprint(self, *args, **kwargs):
-        if self.log_to_stderr:
-            print(*args, file=sys.stderr, **kwargs)
+        print(*args, file=sys.stderr, **kwargs)
