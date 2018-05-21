@@ -55,6 +55,42 @@ DEB_CONF_FILES_FILE=$(DEB_DIR)/conffiles
 
 SUMMARY := $(shell egrep '^Summary:' ./$(PROJECT_NAME)/rpm_specific | awk -F ':' '{print $$2}')
 
+test:
+	
+	# Sytax checking routines.
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.pl)","")
+	# Running Perl Tests
+	find $(SRC_DIR/bin) -type f \
+		-name '*.pl' \
+	| xargs perl -c 
+	
+	find $(SRC_DIR) -type f \
+		-name '*.pl' \
+		-o -name '*.pm' \
+	| xargs podchecker
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.sh)","")
+	# Running Bash Tests
+	find $(SRC_DIR/bin) -type f \
+		-name '*.sh' \
+	| xargs -n1 bash -n 
+	
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.py)","") 
+	# Running Python Tests
+	find $(SRC_DIR/bin) -type f \
+		-name '*.py' \
+	| xargs -n1 python -m py_compile
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.rb)","")
+	# Running Ruby Tests
+	find $(SRC_DIR/bin) -type f \
+		-name '*.rb' \
+	| xargs -n1 ruby -c
+endif
 
 all:
 
