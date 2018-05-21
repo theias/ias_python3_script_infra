@@ -55,43 +55,6 @@ DEB_CONF_FILES_FILE=$(DEB_DIR)/conffiles
 
 SUMMARY := $(shell egrep '^Summary:' ./$(PROJECT_NAME)/rpm_specific | awk -F ':' '{print $$2}')
 
-test:
-	
-	# Sytax checking routines.
-ifneq ("$(wildcard $(SRC_DIR)/bin/*.pl)","")
-	# Running Perl Tests
-	find $(SRC_DIR/bin) -type f \
-		-name '*.pl' \
-	| xargs perl -c 
-	
-	find $(SRC_DIR) -type f \
-		-name '*.pl' \
-		-o -name '*.pm' \
-	| xargs podchecker
-endif
-
-ifneq ("$(wildcard $(SRC_DIR)/bin/*.sh)","")
-	# Running Bash Tests
-	find $(SRC_DIR/bin) -type f \
-		-name '*.sh' \
-	| xargs -n1 bash -n 
-	
-endif
-
-ifneq ("$(wildcard $(SRC_DIR)/bin/*.py)","") 
-	# Running Python Tests
-	find $(SRC_DIR/bin) -type f \
-		-name '*.py' \
-	| xargs -n1 python -m py_compile
-endif
-
-ifneq ("$(wildcard $(SRC_DIR)/bin/*.rb)","")
-	# Running Ruby Tests
-	find $(SRC_DIR/bin) -type f \
-		-name '*.rb' \
-	| xargs -n1 ruby -c
-endif
-
 all:
 
 clean:
@@ -134,6 +97,52 @@ debug:
 	# LOG_DIR: '$(LOG_DIR)'
 	# TEMPLATE_DIR '$(TEMPLATE_DIR)'
 
+package-rpm: clean all install rpmspec rpmbuild
+
+package-deb: clean all install debsetup debbuild
+
+release: test-all
+
+test-all: test test-doc
+
+test:
+	
+	# Sytax checking routines.
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.pl)","")
+	# Running Perl Tests
+	find $(SRC_DIR)/bin -type f \
+		-name '*.pl' \
+	| xargs -r perl -c 
+	
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.sh)","")
+	# Running Bash Tests
+	find $(SRC_DIR)/bin -type f \
+		-name '*.sh' \
+	| xargs -r -n1 bash -n 
+	
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.py)","") 
+	# Running Python Tests
+	find $(SRC_DIR)/bin -type f \
+		-name '*.py' \
+	| xargs -r -n1 python -m py_compile
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.rb)","")
+	# Running Ruby Tests
+	find $(SRC_DIR)/bin -type f \
+		-name '*.rb' \
+	| xargs -r -n1 ruby -c
+endif
+
+test-doc:
+	find $(SRC_DIR) -type f \
+		-name '*.pl' \
+		-o -name '*.pm' \
+	| xargs -r podchecker
 	
 builddir:
 	if [ ! -d build ]; then mkdir build; fi;
