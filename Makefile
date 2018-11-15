@@ -268,7 +268,6 @@ rpmspec: install
 	echo "Name: $(PROJECT_NAME)" >> $(SPEC_FILE)
 	echo "Version: $(SRC_VERSION)" >> $(SPEC_FILE)
 	echo "Release: $(PKG_VERSION)" >> $(SPEC_FILE)
-	echo "BuildArch: $(ARCH)" >> $(SPEC_FILE)
 	echo `svn info |grep '^URL:'` >> $(SPEC_FILE)
 	echo "Packager: $$USER" >> $(SPEC_FILE)
 	
