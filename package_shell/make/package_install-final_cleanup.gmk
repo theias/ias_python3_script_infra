@@ -11,6 +11,9 @@ package_install-final_cleanup:
 	-rm -r "$(LIB_INST_DIR)/perl6/.precomp"
 	find "$(ROOT_DIR)/$(BASE_DIR)" -maxdepth 1 -type d -exec chmod 755 {} \;
 
+	# Clean up python stuff
+	-find "$(LIB_INST_DIR)/python3" -type d -name __pycache__ -exec rm -r {} \;
+	-find "$(ROOT_DIR)/$(BASE_DIR)" -type f -name '*.pyc'
 	
 	################
 	# An example of creating a file owned by
