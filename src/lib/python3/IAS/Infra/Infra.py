@@ -10,8 +10,6 @@ import json
 import getpass
 import pprint
 
-print("HAI\n")
-
 class IASInfra(
     IASInfraLogger,
     IASInfraDispatcher,

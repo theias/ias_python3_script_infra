@@ -7,7 +7,6 @@ This is a description of your project.
 __author__ = "Your Name <your-email@example.com"
 __credits__ = """
 Infrastructure Design: Martin VanWinkle, Institute for Advanced Study
-Python Guidance: Christopher Peterson, Institute for Advanced Study
 """
 
 import os
