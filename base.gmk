@@ -1,0 +1,9 @@
+# Advanced Usage
+# You don't need to edit this file unless you are an advanced user.
+
+ARTIFACT_BASE_NAME = ias-python3-script-infra
+
+ifeq ($(ARTIFACT_NAME),)
+	ARTIFACT_NAME = ias-python3-script-infra
+endif
+

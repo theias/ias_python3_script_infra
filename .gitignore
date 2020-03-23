@@ -1,11 +1,22 @@
+# package shell specific things
 build
 drop/*
 
-*.swp
-
+# transient files
 src/input/*
 src/output/*
 src/log/*
 
+# python
+*.swp
 __pycache__/
 *.pyc
+
+# dia
+*.dia.autosave
+
+# java
+src/java/**/*.class
+
+# perl6
+src/**/.precomp

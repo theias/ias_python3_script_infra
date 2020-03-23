@@ -1,0 +1,42 @@
+DEB_DIR=$(ROOT_DIR)/DEBIAN
+DEB_CONTROL_FILE=$(DEB_DIR)/control
+DEB_CONF_FILES_FILE=$(DEB_DIR)/conffiles
+
+.PHONY: \
+	package-deb \
+	debsetup \
+	debbuild
+
+package-deb: clean all install debsetup debbuild
+
+debsetup:
+	# mkdir -p "$(DEB_DIR)"
+	cp -rL "$(ARTIFACT_DIR)/DEBIAN" "$(DEB_DIR)"
+	"$(ARTIFACT_DIR)/case.sh" all DEB > "$(DEB_CONTROL_FILE)"
+	cat "$(ARTIFACT_DIR)/DEBIAN/control" >> "$(DEB_CONTROL_FILE)"
+
+	# Project config files
+	if [ -e "$(CONF_INST_DIR)" ]; then \
+		find "$(CONF_INST_DIR)" \( -type l -o -type f \) \
+			|  sed -r "s|$(ROOT_DIR)||" \
+			>> "$(DEB_CONF_FILES_FILE)" ; \
+	fi
+
+	# /etc/ config files
+	if [ -e "$(ROOT_DIR)/etc" ]; then \
+		find "$(ROOT_DIR)/etc" \( -type l -o -type f \) \
+			|  sed -r "s|$(ROOT_DIR)||" \
+			>> "$(DEB_CONF_FILES_FILE)" ; \
+	fi
+	
+	
+debbuild:
+	dpkg-deb --build "$(ROOT_DIR)" "$(BUILD_DIR)"
+	
+.PHONY: debug-package_build-deb
+
+debug-package_build-deb:
+	# package_build-deb - debug variables
+	#   DEB_DIR: '$(DEB_DIR)'
+	#   DEB_CONTROL_FILE: '$(DEB_CONTROL_FILE)'
+	#   DEB_CONF_FILES_FILE: '$(DEB_CONF_FILES_FILE)'

@@ -1,0 +1,65 @@
+.PHONY: \
+	package_shell_basic_test-all \
+	package_shell_basic_test-syntax \
+	package_shell_basic_test-doc
+
+package_shell_basic_test-all: \
+	package_shell_basic_test-syntax \
+	package_shell_basic_test-doc
+
+package_shell_basic_test-syntax:
+	
+	# Syntax checking routines.
+	# For "scripts", src/bin is searched, assuming that
+	# things in there use what's under src/lib "correctly"
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.pl)","")
+	# Running Perl Tests
+	find "$(SRC_DIR)/bin" -type f \
+		-name '*.pl' \
+	-print0 | xargs --null -n1 -i perl -c '{}' 
+	
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.sh)","")
+	# Running Bash Tests
+	find "$(SRC_DIR)/bin" -type f \
+		-name '*.sh' \
+	-print0 | xargs --null -n1 -i bash -n '{}'
+	
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.py)","") 
+	# Running Python Tests
+	find "$(SRC_DIR)/bin" -type f \
+		-name '*.py' \
+	-print0 | xargs --null -n1 -i python -m py_compile '{}'
+endif
+
+ifneq ("$(wildcard $(SRC_DIR)/bin/*.rb)","")
+	# Running Ruby Tests
+	find "$(SRC_DIR)/bin" -type f \
+		-name '*.rb' \
+	-print0 | xargs --null -n1 -i ruby -c '{}'
+endif
+
+	# PHP, when running syntax checks on files doesn't check
+	# files that are included. 
+	# Therefore, find looks for all of the PHP files in the
+	# source tree.
+
+	find "$(SRC_DIR)/" -type f \
+		-name '*.php' \
+	-print0 | xargs --null -n1 -i php -n -l '{}'
+
+package_shell_basic_test-doc:
+	# Testing documentation
+	find "$(SRC_DIR)" -type f \
+		-name '*.pl' \
+		-o -name '*.pm' \
+	-exec podchecker {} \;
+
+.PHONY: debug-package_shell_basic_tests
+
+debug-package_shell_basic_tests:
+	# source-basic_tests - debug variables
+	#   (no variables defined)
