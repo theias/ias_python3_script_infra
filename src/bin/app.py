@@ -23,7 +23,7 @@ sys.path.insert(0,
     )
 )
 
-from IAS.Infra.Infra import IASInfra
+from IAS.Infra import IASInfra
 
 # Change "IASApplication" to whatever you want to call your app:
 class IASApplication(IASInfra):
