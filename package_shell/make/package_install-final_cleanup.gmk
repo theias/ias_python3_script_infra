@@ -13,7 +13,7 @@ package_install-final_cleanup:
 
 	# Clean up python stuff
 	-find "$(LIB_INST_DIR)/python3" -type d -name __pycache__ -exec rm -r {} \;
-	-find "$(ROOT_DIR)/$(BASE_DIR)" -type f -name '*.pyc'
+	-find "$(ROOT_DIR)/$(BASE_DIR)" -type f -name '*.pyc' -exec rm -r {} \;
 	
 	################
 	# An example of creating a file owned by
