@@ -2,6 +2,7 @@ ias-python3-script-infra 2.0.0-0 noarch; urgency=low
 
 	* Reorganized to have a better library layout
 	* Including a library version of the sample application
+	* Package rebased
 
  -- Martin VanWinkle  mvanwinkle@ias.edu  Mon, 23 Mar 2020 08:49:36 -0400
 
