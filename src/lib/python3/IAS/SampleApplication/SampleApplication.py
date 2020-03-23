@@ -22,6 +22,6 @@ class IASSampleApplication(IASInfra):
             + generic_output_file
         )
         text_file = open(generic_output_file, "w")
-        text_file.write('Here is an extract.')
+        text_file.write("Here is an extract.\n")
         text_file.close
 
