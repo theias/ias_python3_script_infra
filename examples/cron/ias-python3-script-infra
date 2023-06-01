@@ -1,0 +1,8 @@
+# This file should be root:root , 644 when installed.
+# To debug: systemctl status crond
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root@localhost
+
+# 50 6 * * * iasnetauto /opt/IAS/bin/ias-python3-script-infra/ias-python3-script-infra_hello.sh

@@ -1,0 +1,20 @@
+{
+	"name":"IAS/ias-python3-script-infra" ,
+	"type":"library" ,
+	"description":"CHANGEME: This might work if you put it in the root directory of your git repo." ,
+	"tags":["relevant","tags","go","here"],
+	"license":"GPLv3",
+	"autoload": {
+		"psr-4": {"IAS\\": "src/lib/php7/IAS"}
+	},
+
+	"authors": [{
+			"name":"Person Somebody",
+			"email":"somebody@example.com"
+		}
+	],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    }
+
+}

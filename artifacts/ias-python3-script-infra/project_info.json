@@ -1,0 +1,13 @@
+{
+   "AUTOMATION_GROUP" : "iasnetauto",
+   "summary" : "Standardized infrastructure libraries for Python",
+   "ticket" : "",
+   "installed_directory_layout" : "project_directories-full_project.gmk",
+   "USE_AUTOMATION_PERMISSIONS" : 0,
+   "project_dir" : "ias_python3_script_infra",
+   "wiki_page" : "",
+   "BASE_DIR" : "/opt/IAS",
+   "project_name" : "ias_python3_script_infra",
+   "AUTOMATION_USER" : "iasnetauto",
+   "package_name" : "ias-python3-script-infra"
+}

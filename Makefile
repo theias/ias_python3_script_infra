@@ -1,18 +1,26 @@
-###########################
-# Advanced Usage below.
-###########################
+package_shell_artifact_gmks = $(wildcard artifacts/*/package_shell.gmk)
+artifact_dirs := $(patsubst %/package_shell.gmk,%,$(package_shell_artifact_gmks))
 
-MAKEFILE_PATH = $(strip $(dir $(firstword $(MAKEFILE_LIST))))
-PACKAGE_SHELL_INCLUDE_PATH=$(MAKEFILE_PATH)/package_shell/make
+package_shell_rpms=$(patsubst %,%.rpm,$(artifact_dirs))
+package_shell_debs=$(patsubst %,%.deb,$(artifact_dirs))
 
-include $(MAKEFILE_PATH)/base.gmk
+.PHONY: debug_main_Makefile
+debug_main_Makefile::
+	# package_shell_artifact_gmks: $(package_shell_artifact_gmks)
+	# artifact_dirs: $(artifact_dirs)
+	# package_shell_rpms: $(package_shell_rpms)
+	# package_shell_debs: $(package_shell_debs)
 
-# The following are optional in base.gmk ,
-# but must be set before the other stuff loads
-ifeq ($(BASE_DIR),)
-	BASE_DIR := /opt/IAS
-endif
+.PHONY: package-rpm
+package-rpm: clean $(package_shell_rpms)
 
-include $(MAKEFILE_PATH)/package_shell/main.gmk
+%.rpm: %
+	make -f $</package_shell.gmk package-rpm
 
+.PHONY: package-deb
+package-deb: clean $(package_shell_debs)
+%.deb: %
+	make -f $</package_shell.gmk package-deb
 
+clean:
+	-rm -rf build

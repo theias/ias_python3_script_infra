@@ -1,0 +1,23 @@
+# Build with "snapcraft" in the root of this directory.
+# Then, sudo snap install --devmode ias-python3-script-infra_<version>_<arch>.snap
+
+name: ias-python3-script-infra
+version: '0.1'
+summary: Standardized infrastructure libraries for Python
+description: |
+    Ticket URL: 
+    Wiki Page: 
+
+grade: stable
+confinement: devmode
+base: core18
+
+# apps:
+#     ias-python3-script-infra_hello.sh:
+#         command: src/bin/ias-python3-script-infra_hello.sh
+
+parts:
+    snaptest1:
+        plugin: dump
+        source: ./src
+

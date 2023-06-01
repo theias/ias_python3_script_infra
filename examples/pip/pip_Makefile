@@ -1,0 +1,108 @@
+#!/usr/bin/make
+#\ # DESCRIPTION
+#\
+#\ Due to pep517 this got slightly complicated, so here's what you need
+#\
+#\ # SYNOPSIS
+#\ 
+#\ ## PEP 517 
+#\
+#\ ### Preparation Process for EL / RPM Based Systems
+#\
+#\ #### One-time Process as Root
+#\ 
+#\ As root:
+#\ ```
+#\ make -f pip_Makefile pip_prep_517_dnf
+#\ ```
+#\ (It just installs the necessary packages via dnf)
+#\ 
+#\ #### One-time Process as a User
+#\
+#\ ```
+#\ make -f pip_Makefile pip_prep_517
+#\ ```
+#\
+#\ ### PEP 517 Building
+#\
+#\ ```
+#\ make pip_517
+#\ ```
+#\ ## "Legacy" PIP
+#\
+#\ ### Preparation Process for EL / RPM Based Systems
+#\
+#\ #### One-time Process as Root
+#\
+#\ ```
+#\ make -f pip_Makefile pip_prep_yum
+#\ ```
+#\
+#\ #### One-time Process as a User
+#\
+#\ ```
+#\ make -f pip_Makefile pip_prep
+#\ ```
+#\ 
+#\ ### "Legacy" PIP Building
+#\
+#\ ```
+#\ make -f pip_Makefile pip
+#\ ```
+
+PIP_MAKEFILE_PATH = $(strip $(dir $(firstword $(MAKEFILE_LIST))))
+PIP_MAKEFILE = $(firstword $(MAKEFILE_LIST))
+
+
+.PHONY: python_unittests
+python_unittests:
+	$(PIP_MAKEFILE_PATH)/tests/python_unittest/test_some_script.py
+
+.PHONY: pip
+pip: pip_517
+
+.PHONY: pip_prep
+pip_prep: pip_prep_517
+
+.PHONY: pip_517
+pip_517:
+	python3 -m build
+
+.PHONY: pip_prep_517
+pip_prep_517:
+	python3 -m pip install --upgrade build
+
+.PHONY: pip_prep_517_dnf
+pip_prep_517_dnf:
+	dnf install -y python3-pip python3-pep517
+
+.PHONY: setup_py__pip_prep
+pip_prep:
+	python3 -m pip install --user --upgrade setuptools wheel testresources
+
+.PHONY: pip_prep_yum
+pip_prep_yum:
+	yum install -y python3-pip
+
+.PHONY: setup_py_build_pip
+setup_py__build_pip:
+	python3 setup.py sdist bdist_wheel
+
+.PHONY: pip_install
+pip_install:
+	python3 -m pip install --user .
+
+.PHONY: pip_examine
+pip_examine:
+	tar -tzf dist/*.tar.gz
+
+.PHONY: pip_clean
+pip_clean:
+	-rm -r build dist src/lib/python3/*.egg-info
+
+.PHONY: pip_test_all
+pip_test_all: \
+	python_unittests \
+	pip_clean \
+	pip \
+	pip_examine

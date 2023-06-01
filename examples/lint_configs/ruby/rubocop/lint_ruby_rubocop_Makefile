@@ -1,0 +1,22 @@
+# This is how you'd incorporate rubocop ( rubocop.org )
+# into this project.
+#
+# This allows you to put this at the top of the project
+# (but that can get disorganized very quickly) or you can
+# set SRC_DIR, or incorporate it into something that has
+# already set SRC_DIR.
+
+lint_ruby_rubocop_Makefile_path ?= $(strip $(dir $(firstword $(MAKEFILE_LIST))))
+
+ifneq ("$(wildcard src/*)","")
+	SRC_DIR ?= src
+else
+	SRC_DIR ?= $(lint_ruby_rubocop_Makefile_path)/src
+endif
+
+.PHONY: lint_ruby_rubocop
+lint_ruby_rubocop:
+	rubocop "$(SRC_DIR)"
+
+lint_ruby_rubocop_auto_gen_config:
+	rubocop --auto-gen-config "$(SRC_DIR)"

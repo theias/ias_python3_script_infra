@@ -1,0 +1,20 @@
+# This is how you'd incorporate perlcritic
+# into this project.
+#
+# This allows you to put this at the top of the project
+# (but that can get disorganized very quickly) or you can
+# set SRC_DIR, or incorporate it into something that has
+# already set SRC_DIR.
+
+lint_perl_perlcritic_Makefile_path ?= $(strip $(dir $(firstword $(MAKEFILE_LIST))))
+
+ifneq ("$(wildcard src/*)","")
+	SRC_DIR ?= src
+else
+	SRC_DIR ?= $(lint_perl_perlcritic_Makefile_path)/src
+endif
+
+.PHONY: lint_perl_perlcritic
+lint_perl_perlcritic:
+	perlcritic "$(SRC_DIR)"
+

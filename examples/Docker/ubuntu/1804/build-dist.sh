@@ -1,0 +1,1 @@
+../../generic_deb/build-dist.sh

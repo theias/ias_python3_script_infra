@@ -1,0 +1,33 @@
+variables:
+  GIT_STRATEGY: clone
+cache:
+  key:
+    files:
+      - composer.lock
+  paths:
+    - vendor/
+default:
+  before_script:
+    - echo "Empty before script."
+test_quality_code:
+  stage: build
+  tags:
+    - package_shell_infra_php_app
+  script:
+    - make quality_code_php_before
+    - make test_quality_code
+test_functionality:
+  stage: build
+  tags:
+    - package_shell_infra_php_app
+  script:
+    - make test_functionality
+package-rpm:
+  stage: deploy
+  tags:
+    - package_shell_infra_php_app
+  script:
+    - make package-rpm
+  artifacts:
+    paths:
+      - build/*/RPMS/*/*.rpm

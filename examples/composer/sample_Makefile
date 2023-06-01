@@ -1,0 +1,33 @@
+# These are (PHP centric) targets used for automating specific
+# types of tests.
+#
+# In general, the test targets should assume that the enviroment
+# for testing has already been set up.
+#
+# Targets for setting up the test environment can be defined
+# and can, for example, be called in your CI/CD scripts which
+# then would keep those environments cached for testing.
+
+.PHONY: test_functionality
+test_functionality:
+	php "$(SRC_DIR)"/bin/sample_library_app.php
+
+.PHONY: test_quality
+test_quality:
+	test_quality_code
+
+.PHONY: test_quality_code
+test_quality_code: \
+	test_quality_code_php
+
+.PHONY: quality_code_php_before
+quality_code_php_before:
+	composer install
+
+.PHONY: test_quality_code_php
+test_quality_code_php:
+	"$(PROJECT_DIR)"/vendor/bin/phpcs --standard=phpcs.xml --extensions=php src
+
+.PHONY: fix_quality_code_php
+fix_quality_code_php:
+	"$(PROJECT_DIR)"/vendor/bin/phpcbf --standard=phpcs.xml --extensions=php src
