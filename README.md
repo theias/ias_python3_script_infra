@@ -5,7 +5,7 @@
 This library will not receive any more updates.
 It has been forked to:
 
-* (ias_python3_script_infra2)[https://github.com/theias/ias_python3_script_infra2]
+* [ias_python3_script_infra2](https://github.com/theias/ias_python3_script_infra2)
 
 During the course of improving things, the primary interface to creating an
 IAS.Infra object was changed away from requiring a single value, which corresponded
