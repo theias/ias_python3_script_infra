@@ -10,7 +10,7 @@ It has been forked to:
 During the course of improving things, the primary interface to creating an
 IAS.Infra object was changed away from requiring a single value, which corresponded
 to the location from which all relative paths from the "binary" were calculated.
-I'm now using ```sys.argv[0]`` for that, and that doesn't need to be passed in
+I'm now using ```sys.argv[0]``` for that, and that doesn't need to be passed in
 to the constructor.
 
 This was necessary because I should have made the first and only parameter
