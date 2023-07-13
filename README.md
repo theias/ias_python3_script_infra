@@ -1,5 +1,23 @@
 # ias-python3-script-infra
 
+## DEPRECATED
+
+This library will not receive any more updates.
+It has been forked to:
+
+* (ias_python3_script_infra2)[https://github.com/theias/ias_python3_script_infra2]
+
+During the course of improving things, the primary interface to creating an
+IAS.Infra object was changed away from requiring a single value, which corresponded
+to the location from which all relative paths from the "binary" were calculated.
+I'm now using ```sys.argv[0]`` for that, and that doesn't need to be passed in
+to the constructor.
+
+This was necessary because I should have made the first and only parameter
+optional, and I should have made it a dictionary.
+
+## The Actual Docs
+
 A framework has been developed so that programs (such as those written in Bash, Perl, and Python) use a (somewhat) standardized:
 
 * source repository layout
